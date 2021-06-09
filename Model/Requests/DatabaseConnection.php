@@ -15,6 +15,7 @@ abstract class DatabaseConnection
             $this->database = new PDO('mysql:host=' . $this->host . '; dbname=' . $this->dbName, $this->username,
                 $this->password);
             $this->database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         } catch (Exception $e) {
             die('Erreur ' . $e->getMessage());
         }

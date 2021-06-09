@@ -3,8 +3,18 @@
 
 class CarController
 {
+    private $vehicleManager;
+
+
+    public function __construct()
+    {
+        $this->vehicleManager = new VehicleManager();
+    }
+
+
     public function allCarView()
     {
+        $vehicles = $this->vehicleManager->getAllVehicles();
         require 'View/allCarsView.php';
 
     }
@@ -17,7 +27,7 @@ class CarController
 
     public function addSaleCars()
     {
-
+//       Todo: Add settings for images
         $errors = [];
         $lastentered =[];
 //        Make sure post is in uppercase
@@ -59,7 +69,7 @@ class CarController
             }
             if (count($errors) == 0) {
                 $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
-                    $_POST['price'], $_POST['description']);
+                    $_POST['price'], $_POST['description'],$_POST['image']);
                 header('Location: index.php?controller=car&action=list');
                 exit();
             }
