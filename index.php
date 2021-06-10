@@ -1,83 +1,111 @@
 <?php
-
+session_start();
 
 include 'Components/header.php';
 require 'include.php';
 
 
 if (!isset($_GET['controller']) || !isset($_GET['action'])) {
-    header("Location: index.php?controller=ad&action=list");
+    header("Location: index.php?controller=security&action=login");
 }
-
+//*************************************************************************
+//Security
+//*************************************************************************
 
 if ($_GET['controller'] == 'security') {
-    if ($_GET['action']=='login'){
+    if ($_GET['action'] == 'login') {
         $controller = new SecurityController();
         $controller->loginPage();
     }
-    if ($_GET['action']=='register'){
+    if ($_GET['action'] == 'register') {
         $controller = new SecurityController();
         $controller->registerPage();
     }
-    if ($_GET['action']=='logout'){
+    if ($_GET['action'] == 'logout') {
         $controller = new SecurityController();
         $controller->log_out();
     }
 
 
 }
-
-
+//*************************************************************************
+//Car
+//*************************************************************************
 
 if ($_GET['controller'] == 'car') {
-      //secure the site
-    if( empty($_SESSION) || !$_SESSION['user']){
+
+    if (empty($_SESSION) || !$_SESSION['user']) {
         header("Location: index.php?controller=security&action=login");
     }
-    if ($_GET['action']=='list'){
+
+    if ($_GET['action'] == 'list') {
         $controller = new CarController();
         $controller->allCarView();
     }
-    if ($_GET['action']=='add'){
+    if ($_GET['action'] == 'add') {
         $controller = new CarController();
         $controller->addSaleCars();
     }
-    if ($_GET['action']=='detail'){
+    if ($_GET['action'] == 'detail') {
         $controller = new CarController();
-        $controller->carDetail();
+        $controller->carDetail($_GET['id']);
     }
-    if ($_GET['action']=='home'){
+
+}
+
+//*************************************************************************
+//Admin
+//*************************************************************************
+
+
+if ($_GET['controller'] == 'admin') {
+
+    if (empty($_SESSION) || !$_SESSION['user']) {
+        header("Location: index.php?controller=security&action=login");
+    }
+
+    if ($_GET['action'] == 'manage') {
+        $controller = new AdminController();
+        $controller->adminManage();
+    }
+    if ($_GET['action'] == 'home') {
         $controller = new AdminController();
         $controller->adminDashboard();
     }
-
-
 }
 
-if ($_GET['controller'] == 'admin' && $_GET['action'] == 'manage') {
-    $controller = new AdminController();
-    $controller->adminManage();
-}
+
+//*************************************************************************
+//User
+//*************************************************************************
 
 if ($_GET['controller'] == 'user' && $_GET['action'] == 'profile') {
+    if (empty($_SESSION) || !$_SESSION['user']) {
+        header("Location: index.php?controller=security&action=login");
+    }
     $controller = new UserController();
     $controller->userProfile();
 }
-
+//*************************************************************************
+//Garage
+//*************************************************************************
 if ($_GET['controller'] == 'garage') {
 
-    if ($_GET['action']=='list'){
+    if ($_GET['action'] == 'list') {
         $controller = new GarageController();
         $controller->viewGarages();
     }
-    if ($_GET['action']=='detail'){
+    if ($_GET['action'] == 'detail' ) {
         $controller = new GarageController();
         $controller->garageDetail();
     }
 
 }
 
-if ($_GET['controller'] == 'ad' ) {
+//*************************************************************************
+//Adverts
+//*************************************************************************
+if ($_GET['controller'] == 'ad') {
     if ($_GET['action'] == 'list') {
         $controller = new AdvertController();
         $controller->adlist();
@@ -87,4 +115,10 @@ if ($_GET['controller'] == 'ad' ) {
         $controller->adDetail();
     }
 
+
+}
+
+if ($_GET['controller']=='error' && $_GET['action']=='not-found'){
+    $controller = new ExceptionController();
+    $controller->pageNotFound();
 }

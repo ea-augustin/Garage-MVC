@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 class SecurityController
 {
@@ -16,6 +16,7 @@ class SecurityController
         $lastentered = [];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             if (empty($_POST['username'])) {
                 $errors[] = 'Please enter a username';
             } else {
@@ -33,14 +34,13 @@ class SecurityController
                     header('Location: index.php?controller=car&action=list');
                 } else {
                     $errors[] = 'This user does not exist';
-
                 }
             }
 
-            require 'View/loginPage.php';
-
         }
+        require 'View/loginPage.php';
     }
+
 
     public function registerPage()
 
@@ -119,13 +119,12 @@ class SecurityController
     }
 
     public function log_out()
-    {
-        // Destroy and unset active session
+    {   //Destroy and unset active session
         session_destroy();
-        unset($_SESSION['user']);
-        session_unset();
-        header('Location: index.php?controller=security&action=login');
-        exit();
+
+        header('Location: index.php?controller=car&action=list');
+
+
     }
 
 }

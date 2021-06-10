@@ -10,54 +10,26 @@ include 'Components/header.php';
 <!--/Navigation Bar-->
 
 <!-- SHOWCASE -->
-<section id="showcase" class="py-5 mt-5">
-    <div class="primary-overlay text-white text-center">
-        <div class="container">
-            <h1> Car Details</h1>
-            <span class="btn btn-dark"><a  href="index.php?controller=car&action=list"
-                                           class="nav-link text-white">Car List</a> </span>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Action</th>
-                    <th scope="col">Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>+</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>+</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>+</td>
-                    <td>-</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<main class="mt-5">
+    <div class="container">
+        <h2><a href="index.php?controller=car&action=list"> <i class="fa fa-arrow-left"></i></a></h2>
     </div>
-
-
-</section>
+    <section>
+        <div class="container">
+            <div class="jumbotron text-center outline-danger">
+                <h1 class="display-4"><?php echo($vehicle->getBrand()) ?></h1>
+                <img style="max-width:200px" src="<?php echo('images/profile/'.$vehicle->getImage()); ?>"
+                     alt="User Image <?php echo($vehicle->getImage()); ?>">
+                <p class="lead"><?php echo($vehicle->getModel()) ?></p>
+                <hr class="my-4">
+                <p><?php echo($vehicle->getDescription()) ?></p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
 
 
 <!-- FOOTER -->

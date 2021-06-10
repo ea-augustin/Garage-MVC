@@ -19,9 +19,16 @@ class CarController
 
     }
 
-    public function carDetail()
+    public function carDetail($id)
     {
-        require 'View/carDetail.php';
+        $vehicle = $this->vehicleManager->getOneVehicle($id);
+
+        if ($vehicle) {
+            require 'View/carDetail.php';
+        }else {
+            header('Location: index.php?controller=error&action=not-found&message=vehicle-not-found');
+        }
+
 
     }
 
@@ -29,47 +36,47 @@ class CarController
     {
 //       Todo: Add settings for images
         $errors = [];
-        $lastentered =[];
+        $lastentered = [];
 //        Make sure post is in uppercase
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (empty($_POST['brand'])) {
                 $errors[] = 'Please add a brand';
-            }else{
+            } else {
                 $lastentered['brand'] = $_POST['brand'];
             }
 
             if (empty($_POST['model'])) {
                 $errors[] = 'Please add the model';
-            }else{
+            } else {
                 $lastentered['model'] = $_POST['model'];
             }
 
             if (empty($_POST['fueltype'])) {
                 $errors[] = 'Please add the fuel type';
-            }else{
+            } else {
                 $lastentered['fueltype'] = $_POST['fueltype'];
             }
 
             if (empty($_POST['horsepower'])) {
                 $errors[] = 'Please add the horsepower';
-            }else{
+            } else {
                 $lastentered['horsepower'] = $_POST['horsepower'];
             }
 
             if (empty($_POST['price'])) {
                 $errors[] = 'Please add the price';
-            }else{
+            } else {
                 $lastentered['price'] = $_POST['price'];
             }
 
             if (empty($_POST['description'])) {
                 $errors[] = 'Please add a description';
-            }else{
+            } else {
                 $lastentered['description'] = $_POST['description'];
             }
             if (count($errors) == 0) {
                 $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
-                    $_POST['price'], $_POST['description'],$_POST['image']);
+                    $_POST['price'], $_POST['description'], $_POST['image']);
                 header('Location: index.php?controller=car&action=list');
                 exit();
             }

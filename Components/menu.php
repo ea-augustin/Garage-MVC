@@ -1,3 +1,4 @@
+<?php ?>
 <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
     <div class="container">
         <a href="index.php?controller=ad&action=list" class="navbar-brand">
@@ -14,27 +15,17 @@
                 </li>
                 <?php
 
-                if (!isset($_SESSION) && !isset($_SESSION['login'])) {
+                if (empty($_SESSION) && !isset($_SESSION['user'])) {
                     echo(' <li class="nav-item">
                     <a href="index.php?controller=security&action=login" class="nav-link"><i class="fas fa-user"></i>Login</a>
                 </li>');
-                }else {
+                } else {
                     echo('<li class="nav-item">
                     <a href="index.php?controller=security&action=logout"  class="nav-link"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </li>');
                 }
                 ?>
-                <?php
-                //hide details button when session
-                if (isset($_SESSION) && isset($_SESSION['login'])) {
-                    echo(' <li class="nav-item">
-                    <a href="ShowAllUsers.php" class="nav-link"><i class="fas fa-table fa-x2"></i>User Admin</a>
-                </li>');
-                    echo(' <li class="nav-item">
-                    <a href="ShowAllArticles.php" class="nav-link"><i class="fas fa-table fa-x2"></i>Article Admin</a>
-                </li>');
-                }
-                ?>
+
                 <li class="nav-item">
                     <a href="index.php?controller=security&action=register" class="nav-link">Register</a>
                 </li>

@@ -35,6 +35,7 @@ include 'Components/header.php';
                 </thead>
                 <tbody>
                 <?php
+
                 foreach ($vehicles as $vehicle) {
                     echo('
                     <tr>
@@ -46,7 +47,7 @@ include 'Components/header.php';
                     <td>' . $vehicle->getPrice() . '</td>
                     <td>' . $vehicle->getDescription() . '</td>
                     <td>' . $vehicle->getImage() . '</td>
-                    <td class=""><a href="index.php?controller=car&action=detail&id= '.$vehicle->getId().' "><i class="fas fa-binoculars bg-light"></i></a></td>   
+                    <td class=""><a href="index.php?controller=car&action=detail&id='.$vehicle->getId().' "><i class="fas fa-binoculars bg-light"></i></a></td>   
                 </tr>
                     ');
                 }

@@ -22,8 +22,9 @@ class Vehicle
      * @param $description
      * @param $image
      */
-    public function __construct($brand, $model, $fueltype, $horsepower, $price, $description, $image,$id=null)
+    public function __construct($brand, $model, $fueltype, $horsepower, $price, $description, $image, $id=null)
     {
+        $this->id =$id;
         $this->brand = $brand;
         $this->model = $model;
         $this->fueltype = $fueltype;
@@ -31,7 +32,7 @@ class Vehicle
         $this->price = $price;
         $this->description = $description;
         $this->image = $image;
-        $this->id =$id;
+
     }
 
     /**

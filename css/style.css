@@ -12,10 +12,11 @@ body {
 #showcase {
   position: relative;
   background: url("../images/herosplash.jpg") no-repeat;
-  background-size: cover;
+  background-position-y: center;
+  background-size:cover;
   min-height: 600px; }
   #showcase .primary-overlay {
-    background: rgba(50, 146, 166, 0.8);
+    background: rgba(50, 146, 166, 0.6);
     position: absolute;
     top: 0;
     left: 0;

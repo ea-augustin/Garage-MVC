@@ -18,12 +18,27 @@ class VehicleManager extends DatabaseConnection
         //Here we break down the object into tables
         foreach ($results as $result) {
             $vehicleTable[] = new Vehicle($result['brand'], $result['model'], $result['fueltype']
-                , $result['horsepower'], $result['price'], $result['description'],$result['image']);
+                , $result['horsepower'], $result['price'], $result['description'],$result['image'],$result['id']);
         }
 
         return $vehicleTable;
 
     }
+
+
+    public function getOneVehicle($id){
+        $vehicle=null;
+        $query = $this->database->prepare('SELECT * FROM vehicle WHERE id = :id');
+        $query->execute(['id'=> $id]);
+        $results= $query->fetch();
+       if($results){
+           $vehicle = new Vehicle($results['brand'],$results['model'],$results['fueltype'],$results['horsepower']
+                                  ,$results['price'],$results['description'],$results['id']);
+       }
+       return $vehicle;
+
+    }
+
 
 
 

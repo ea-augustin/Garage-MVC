@@ -1,5 +1,6 @@
 <?php
 require 'Controller/CarController.php';
+require 'Controller/ExceptionController.php';
 require 'Controller/SecurityController.php';
 require 'Controller/AdminController.php';
 require 'Controller/AdvertController.php';
