@@ -1,8 +1,15 @@
 <?php
-
+session_start();
 
 class SecurityController
 {
+    private $userManager;
+
+    public function __construct()
+    {
+        $this->userManager = new UserManager();
+    }
+
     public function loginPage()
     {
         $errors = [];
@@ -15,22 +22,24 @@ class SecurityController
                 $lastentered['username'] = $_POST['username'];
             }
 
-
             if (empty($_POST['password'])) {
                 $errors[] = 'Please enter a password';
             }
 
             if (count($errors) == 0) {
-                $user = new User($_POST['username'], $_POST['firstname'], $_POST['lastname'], $_POST['email'],
-                    $_POST['address'], $_POST['password']);
+                $loggedUser = $this->userManager->login($_POST['username'], $_POST['password']);
+                if ($loggedUser) {
+                    $_SESSION['user'] = serialize($loggedUser);
+                    header('Location: index.php?controller=car&action=list');
+                } else {
+                    $errors[] = 'This user does not exist';
 
-                header('Location: index.php?controller=user&action=login');
-                exit();
+                }
             }
+
+            require 'View/loginPage.php';
+
         }
-
-        require 'View/loginPage.php';
-
     }
 
     public function registerPage()
@@ -81,8 +90,7 @@ class SecurityController
 
             if (empty($_POST['password'])) {
                 $errors[] = 'Please enter a password';
-            }
-            elseif (strlen($_POST['password']) < 8) {
+            } elseif (strlen($_POST['password']) < 8) {
                 $errors[] = 'Please enter a password with at least 8 characters';
             }
 //            elseif (password_verify($password, $hash)) {
@@ -108,6 +116,16 @@ class SecurityController
         }
         require 'View/registerPage.php';
 
+    }
+
+    public function log_out()
+    {
+        // Destroy and unset active session
+        session_destroy();
+        unset($_SESSION['user']);
+        session_unset();
+        header('Location: index.php?controller=security&action=login');
+        exit();
     }
 
 }

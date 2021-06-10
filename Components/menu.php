@@ -20,7 +20,7 @@
                 </li>');
                 }else {
                     echo('<li class="nav-item">
-                    <a href="validation/logout-manager.php" class="nav-link"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                    <a href="index.php?controller=security&action=logout"  class="nav-link"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </li>');
                 }
                 ?>

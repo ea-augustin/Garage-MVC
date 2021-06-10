@@ -24,4 +24,7 @@ class VehicleManager extends DatabaseConnection
         return $vehicleTable;
 
     }
+
+
+
 }

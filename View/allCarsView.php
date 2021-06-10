@@ -17,8 +17,6 @@ include 'Components/header.php';
             <h1> Car View</h1>
             <span class="btn btn-dark"><a href="index.php?controller=garage&action=list"
                                           class="nav-link text-white">Garages</a> </span>
-            <span class="btn btn-dark"><a href="index.php?controller=car&action=detail"
-                                          class="nav-link text-white">Car Detail</a> </span>
             <span class="btn btn-dark"><a href="index.php?controller=car&action=add"
                                           class="nav-link text-white">Add</a> </span>
             <table class="table">
@@ -27,8 +25,8 @@ include 'Components/header.php';
                     <th scope="col">#</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Model</th>
-                    <th scope="col">Fuel Type</th>
-                    <th scope="col">Horse Power</th>
+                    <th scope="col">Fuel</th>
+                    <th scope="col">HP</th>
                     <th scope="col">Price</th>
                     <th scope="col">Description</th>
                     <th scope="col">Image</th>
@@ -44,7 +42,7 @@ include 'Components/header.php';
                     <td>' . $vehicle->getBrand() . '</td>
                     <td>' . $vehicle->getModel() . '</td>
                     <td>' . $vehicle->getFueltype() . '</td>
-                     <td>' . $vehicle->getHorsepower() . '</td>
+                     <td>' .$vehicle->getHorsepower() . '</td>
                     <td>' . $vehicle->getPrice() . '</td>
                     <td>' . $vehicle->getDescription() . '</td>
                     <td>' . $vehicle->getImage() . '</td>
