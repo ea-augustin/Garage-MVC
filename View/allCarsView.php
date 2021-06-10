@@ -10,16 +10,16 @@ include 'Components/header.php';
 <!--/Navigation Bar-->
 
 <!-- SHOWCASE -->
-<section id="showcase" class="py-5 mt-5">
+<section  class="py-5 mt-5">
 
-    <div class="primary-overlay text-white">
+    <div class="primary-overlay ">
         <div class="container">
             <h1> Car View</h1>
-            <span class="btn btn-dark"><a href="index.php?controller=garage&action=list"
+            <span class="btn btn-info btn-sm my-3"><a href="index.php?controller=garage&action=list"
                                           class="nav-link text-white">Garages</a> </span>
-            <span class="btn btn-dark"><a href="index.php?controller=car&action=add"
+            <span class="btn btn-info btn-sm"><a href="index.php?controller=car&action=add"
                                           class="nav-link text-white">Add</a> </span>
-            <table class="table">
+            <table class="table text-center">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -31,6 +31,7 @@ include 'Components/header.php';
                     <th scope="col">Description</th>
                     <th scope="col">Image</th>
                     <th scope="col">Details</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,7 +48,8 @@ include 'Components/header.php';
                     <td>' . $vehicle->getPrice() . '</td>
                     <td>' . $vehicle->getDescription() . '</td>
                     <td>' . $vehicle->getImage() . '</td>
-                    <td class=""><a href="index.php?controller=car&action=detail&id='.$vehicle->getId().' "><i class="fas fa-binoculars bg-light"></i></a></td>   
+                    <td class=""><a href="index.php?controller=car&action=detail&id='.$vehicle->getId().' "><i class="fas fa-binoculars bg-light"></i></a></td>  
+                    <td class=""><a href="index.php?controller=car&action=delete&id='.$vehicle->getId().' "><i class="fas fa-minus"></i></a></td> 
                 </tr>
                     ');
                 }

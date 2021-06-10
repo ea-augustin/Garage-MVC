@@ -25,7 +25,7 @@ class CarController
 
         if ($vehicle) {
             require 'View/carDetail.php';
-        }else {
+        } else {
             header('Location: index.php?controller=error&action=not-found&message=vehicle-not-found');
         }
 
@@ -83,6 +83,19 @@ class CarController
 
         }
         require 'View/addCars.php';
+
+    }
+
+    public function deleteCar($id)
+    {
+        $vehicle = $this->vehicleManager->getOneVehicle($id);
+
+        if ($vehicle != null) {
+            $this->vehicleManager->delete($vehicle);
+            header('Location: index.php?controller=car&action=list');
+        } else {
+            header('Location: index.php?controller=error&action=not-found&message=vehicle-not-found');
+        }
 
     }
 }

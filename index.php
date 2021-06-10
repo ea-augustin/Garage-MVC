@@ -51,6 +51,11 @@ if ($_GET['controller'] == 'car') {
         $controller->carDetail($_GET['id']);
     }
 
+    if ($_GET['action'] == 'delete' && isset($_GET['id']) ) {
+        $controller = new CarController();
+        $controller->deleteCar($_GET['id']);
+    }
+
 }
 
 //*************************************************************************
@@ -99,6 +104,8 @@ if ($_GET['controller'] == 'garage') {
         $controller = new GarageController();
         $controller->garageDetail();
     }
+
+
 
 }
 

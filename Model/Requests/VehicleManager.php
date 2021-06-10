@@ -33,13 +33,19 @@ class VehicleManager extends DatabaseConnection
         $results= $query->fetch();
        if($results){
            $vehicle = new Vehicle($results['brand'],$results['model'],$results['fueltype'],$results['horsepower']
-                                  ,$results['price'],$results['description'],$results['id']);
+                                  ,$results['price'],$results['description'],$results['image'],$results['id']);
        }
        return $vehicle;
 
     }
 
 
+     public function delete(Vehicle $vehicle){
 
+       $query= $this->database->prepare('DELETE FROM vehicle WHERE id = :id');
+       $query->execute([
+           'id'=> $vehicle->getId()
+       ]);
+     }
 
 }

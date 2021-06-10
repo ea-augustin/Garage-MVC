@@ -34,9 +34,6 @@
                     <a href="index.php?controller=car&action=list" class="nav-link"><i class="fas fa-car-side"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?controller=car&action=detail" class="nav-link">Details</a>
-                </li>
-                <li class="nav-item">
                     <a href="index.php?controller=ad&action=list" class="nav-link"><i class="far fa-newspaper"></i></a>
                 </li>
                 <li class="nav-item">
