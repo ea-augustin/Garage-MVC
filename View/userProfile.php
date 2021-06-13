@@ -47,8 +47,8 @@ include 'Components/header.php';
                     <td>' . $user->getAddress() . '</td>
                     <td><img src="images/profiles/' . $user->getimage() . ' " style="height:200px; width:300px;" alt=' .
                         $user->getUsername() . '></td>
-                    <td class=""><a href="index.php?controller=security&action=detail&id=' . $user->getId() . ' "><i class="fas fa-binoculars bg-light"></i></a></td>  
-                    <td class=""><a href= "index.php?controller=security&action=add"><i class="fas fa-plus bg-light"></i></a></td>  
+                    <td class=""><a href="index.php?controller=security&action=details&id=' . $user->getId() . ' "><i class="fas fa-binoculars bg-light"></i></a></td>  
+                    <td class=""><a href= "index.php?controller=security&action=register"><i class="fas fa-plus bg-light"></i></a></td>  
                        <td class=""><a href= "index.php?controller=security&action=add"><i class="fas fa-plus bg-light"></i></a></td>  
                     <td class=""><a href="index.php?controller=security&action=delete&id=' . $user->getId() . ' "><i class="fas fa-minus"></i></a></td> 
                 </tr>

@@ -65,4 +65,24 @@ class UserManager extends DatabaseConnection
 
     }
 
+    public function getOneUser($id){
+        $user=null;
+        $query = $this->database->prepare('SELECT * FROM users WHERE id= :id');
+        $query ->execute(['id'=>$id]);
+        $results =$query->fetch();
+
+        if($results){
+            $user = new User($results['username'],$results['firstname'],$results['lastname'],$results['email'],
+                $results['address'],$results['password'],$results['image'],$results['id']);
+        }
+        return $user;
+    }
+
+    public function deleteUser(User $user){
+        $query =$this->database->prepare('DELETE FROM users WHERE id= :id');
+        $query->execute([
+        'id'=> $user->getId()
+        ]);
+    }
+
 }

@@ -147,4 +147,30 @@ class SecurityController
         require 'View/userProfile.php';
     }
 
+
+    public function userDetails($id){
+        $user = $this->userManager->getOneUser($id);
+        $errors = [];
+        if($user){
+            require 'View/userDetails.php';
+        }else {
+            $errors[] = 'Sorry no user found';
+        }
+
+    }
+
+    public function userDelete($id){
+
+        $user = $this->userManager->getOneUser($id);
+        $errors = [];
+        if ($user != null){
+            $this->userManager->deleteUser($user);
+            header('Location: index.php?controller=security&action=profiles');
+        }else{
+            $errors[] = 'Sorry no user found to be deleted';
+            header('Location: index.php?controller=security&action=profiles');
+        }
+
+    }
+
 }

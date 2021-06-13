@@ -32,6 +32,17 @@ if ($_GET['controller'] == 'security') {
         $controller->getAllUserProfiles();
     }
 
+    if ($_GET['action'] == 'details') {
+        $controller = new SecurityController();
+        $controller->userDetails($_GET['id']);
+    }
+
+    if ($_GET['action'] == 'delete' && isset($_GET['id'])) {
+        $controller = new SecurityController();
+        $controller->userDelete($_GET['id']);
+    }
+
+
 }
 //*************************************************************************
 //Car
