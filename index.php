@@ -21,11 +21,16 @@ if ($_GET['controller'] == 'security') {
         $controller = new SecurityController();
         $controller->registerPage();
     }
+
     if ($_GET['action'] == 'logout') {
         $controller = new SecurityController();
         $controller->log_out();
     }
 
+    if ($_GET['action'] == 'profiles') {
+        $controller = new SecurityController();
+        $controller->getAllUserProfiles();
+    }
 
 }
 //*************************************************************************

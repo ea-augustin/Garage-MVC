@@ -10,6 +10,7 @@ class User
     private $email;
     private $address;
     private $password;
+    private $image;
 
     /**
      * User constructor.
@@ -21,7 +22,7 @@ class User
      * @param $password
      */
 
-    public function __construct($username, $firstname, $lastname, $email, $address, $password, $id = null)
+    public function __construct($username, $firstname, $lastname, $email, $address, $password,$image,$id = null)
     {
         $this->id = $id;
         $this->username = $username;
@@ -30,6 +31,7 @@ class User
         $this->email = $email;
         $this->address = $address;
         $this->password = $password;
+        $this->image = $image;
     }
 
     /**
@@ -143,6 +145,24 @@ class User
     {
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+
 
 
 }

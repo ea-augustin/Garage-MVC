@@ -48,6 +48,10 @@ class SecurityController
         $errors = [];
         $lastentered = [];
 
+        //image prerequisites
+        $extension_upload = $_FILES['profileImg']['type'];
+        $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (empty($_POST['username'])) {
@@ -105,9 +109,18 @@ class SecurityController
                 $errors[] = 'Passwords did not match please try again';
             }
 
+            if (($_FILES['carImg']['size'] > 600000)) {
+                $errors[] = 'The selected image it too large , please choose a smaller image';
+            } else {
+                if (in_array($extension_upload, $authorizedExtentions))
+                    $filename = uniqid() . '_' . basename($_FILES['profileImg']['name']);
+                $imageUrl = move_uploaded_file($_FILES['profileImg']['tmp_name'], 'images/profiles/' . $filename);
+            }
+
             if (count($errors) == 0) {
                 $register = new User($_POST['username'], $_POST['firstname'], $_POST['lastname'], $_POST['email']
-                    , $_POST['address'], $_POST['password']);
+                    , $_POST['address'], $_POST['password'], $filename);
+                $this->userManager->registerUser($register);
                 header('Location: index.php?controller=security&action=login');
                 exit();
             }
@@ -125,6 +138,13 @@ class SecurityController
         header('Location: index.php?controller=car&action=list');
 
 
+    }
+
+    public function getAllUserProfiles()
+    {
+        $users = $this->userManager->getAllUsers();
+
+        require 'View/userProfile.php';
     }
 
 }

@@ -39,6 +39,7 @@ include 'Components/header.php';
                 <?php
 
                 foreach ($vehicles as $vehicle) {
+
                     echo('
                     <tr>
                     <td>' . $vehicle->getId() . '</td>

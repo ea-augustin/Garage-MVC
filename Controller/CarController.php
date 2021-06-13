@@ -75,11 +75,11 @@ class CarController
             }
 
             if (($_FILES['carImg']['size'] > 600000)) {
-               $errors[] = 'The selected image it too large , please choose a smaller image';
-            }else{
+                $errors[] = 'The selected image it too large , please choose a smaller image';
+            } else {
                 if (in_array($extension_upload, $authorizedExtentions))
                     $filename = uniqid() . '_' . basename($_FILES['carImg']['name']);
-                 $imageUrl = move_uploaded_file($_FILES['carImg']['tmp_name'], 'images/car/'.$filename);
+                $imageUrl = move_uploaded_file($_FILES['carImg']['tmp_name'], 'images/car/' . $filename);
             }
 
             if (empty($_POST['description'])) {

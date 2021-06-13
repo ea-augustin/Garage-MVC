@@ -40,7 +40,8 @@
                     <a href="index.php?controller=admin&action=home" class="nav-link"><i class="fas fa-tools"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?controller=user&action=profile" class="nav-link"><i class="fas fa-users"></i></a>
+                    <a href="index.php?controller=security&action=profiles" class="nav-link"><i class="fas
+                    fa-users"></i></a>
                 </li>
             </ul>
         </div>
