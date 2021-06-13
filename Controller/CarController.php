@@ -37,6 +37,11 @@ class CarController
 //       Todo: Add settings for images
         $errors = [];
         $lastentered = [];
+
+//       image prerequisites
+        $extension_upload = $_FILES['carImg']['type'];
+        $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
+
 //        Make sure post is in uppercase
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (empty($_POST['brand'])) {
@@ -69,6 +74,14 @@ class CarController
                 $lastentered['price'] = $_POST['price'];
             }
 
+            if (($_FILES['carImg']['size'] > 600000)) {
+               $errors[] = 'The selected image it too large , please choose a smaller image';
+            }else{
+                if (in_array($extension_upload, $authorizedExtentions))
+                    $filename = uniqid() . '_' . basename($_FILES['carImg']['name']);
+                 $imageUrl = move_uploaded_file($_FILES['carImg']['tmp_name'], 'images/car/'.$filename);
+            }
+
             if (empty($_POST['description'])) {
                 $errors[] = 'Please add a description';
             } else {
@@ -76,7 +89,8 @@ class CarController
             }
             if (count($errors) == 0) {
                 $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
-                    $_POST['price'], $_POST['description'], $_POST['image']);
+                    $_POST['price'], $_POST['description'], $filename);
+                $this->vehicleManager->addVehicle($vehicle);
                 header('Location: index.php?controller=car&action=list');
                 exit();
             }
@@ -96,6 +110,19 @@ class CarController
         } else {
             header('Location: index.php?controller=error&action=not-found&message=vehicle-not-found');
         }
+
+    }
+
+    public function editCar($id)
+    {
+
+
+    }
+
+
+    public function uploadCar($id)
+    {
+
 
     }
 }

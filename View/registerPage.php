@@ -9,7 +9,7 @@ include 'components/header.php';
 <!--/Navigation Bar-->
 
 <!-- SHOWCASE -->
-<section id="showcase" class="py-5">
+<section id="showcase" class="">
     <div class="primary-overlay text-white">
         <div class="container">
             <div class="row">

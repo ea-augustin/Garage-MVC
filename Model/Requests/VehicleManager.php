@@ -48,4 +48,23 @@ class VehicleManager extends DatabaseConnection
        ]);
      }
 
+
+
+    public function addVehicle(Vehicle $vehicle){
+     $query = $this->database->prepare('INSERT INTO vehicle  (brand,model,fueltype,horsepower,price,description,image) 
+                                       VALUES (:brand,:model,:fueltype,:horsepower,:price,:description,:image)');
+
+     $query->execute([
+         'brand'=> $vehicle->getBrand(),
+         'model'=> $vehicle->getModel(),
+         'fueltype'=> $vehicle->getFueltype(),
+         'horsepower'=> $vehicle->getHorsepower(),
+         'price'=> $vehicle->getPrice(),
+         'description'=> $vehicle->getDescription(),
+         'image'=> $vehicle->getImage()
+
+
+     ]);
+    }
+
 }

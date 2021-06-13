@@ -16,7 +16,7 @@ include 'Components/header.php';
         <div class="container">
             <div class="col-lg-6 mt-5 pt-5">
                 <h2>Add Car</h2>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <input type="text" class="form-control" id="brand" name="brand"
                                aria-describedby="brandHelp"
@@ -55,6 +55,11 @@ include 'Components/header.php';
                                placeholder="Description" value="<?php echo ((isset($lastentered['description'])) ?
                             $lastentered['description'] : '')
                         ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="carImg" class="text-white">Image</label><br>
+                        Profile Image: <input type="file" name="carImg"> <br>
+                        <span>jpg,jpeg,gif and png files only</span>
                     </div>
                     <?php
                     require 'Components/error.php';

@@ -2,7 +2,7 @@
 include 'Components/header.php';
 
 ?>
-
+<html lang="">
 <body id="home" data-spy="scroll" data-target="#main-nav">
 
 <!--Navigation Bar-->
@@ -10,15 +10,15 @@ include 'Components/header.php';
 <!--/Navigation Bar-->
 
 <!-- SHOWCASE -->
-<section  class="py-5 mt-5">
+<section class="py-5 mt-5">
 
     <div class="primary-overlay ">
         <div class="container">
             <h1> Car View</h1>
             <span class="btn btn-info btn-sm my-3"><a href="index.php?controller=garage&action=list"
-                                          class="nav-link text-white">Garages</a> </span>
+                                                      class="nav-link text-white">Garages</a> </span>
             <span class="btn btn-info btn-sm"><a href="index.php?controller=car&action=add"
-                                          class="nav-link text-white">Add</a> </span>
+                                                 class="nav-link text-white">Add</a> </span>
             <table class="table text-center">
                 <thead>
                 <tr>
@@ -31,6 +31,7 @@ include 'Components/header.php';
                     <th scope="col">Description</th>
                     <th scope="col">Image</th>
                     <th scope="col">Details</th>
+                    <th scope="col">Add</th>
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
@@ -44,12 +45,14 @@ include 'Components/header.php';
                     <td>' . $vehicle->getBrand() . '</td>
                     <td>' . $vehicle->getModel() . '</td>
                     <td>' . $vehicle->getFueltype() . '</td>
-                     <td>' .$vehicle->getHorsepower() . '</td>
+                     <td>' . $vehicle->getHorsepower() . '</td>
                     <td>' . $vehicle->getPrice() . '</td>
                     <td>' . $vehicle->getDescription() . '</td>
-                    <td>' . $vehicle->getImage() . '</td>
-                    <td class=""><a href="index.php?controller=car&action=detail&id='.$vehicle->getId().' "><i class="fas fa-binoculars bg-light"></i></a></td>  
-                    <td class=""><a href="index.php?controller=car&action=delete&id='.$vehicle->getId().' "><i class="fas fa-minus"></i></a></td> 
+                    <td><img src="images/car/' . $vehicle->getimage() . ' " style="height:200px; width:300px;" alt=' .
+                        $vehicle->getBrand() . '></td>
+                    <td class=""><a href="index.php?controller=car&action=detail&id=' . $vehicle->getId() . ' "><i class="fas fa-binoculars bg-light"></i></a></td>  
+                       <td class=""><a href= "index.php?controller=car&action=add"><i class="fas fa-plus bg-light"></i></a></td>  
+                    <td class=""><a href="index.php?controller=car&action=delete&id=' . $vehicle->getId() . ' "><i class="fas fa-minus"></i></a></td> 
                 </tr>
                     ');
                 }
@@ -63,12 +66,8 @@ include 'Components/header.php';
 
 </section>
 
-
 <!-- FOOTER -->
-<?php include 'Components/footer.php';
-include 'Components/global-javascript.php'; ?>
+<?php include 'Components/footer.php'; ?>
 <!-- /FOOTER -->
 
-</body>
-</html>
 

@@ -55,6 +55,14 @@ if ($_GET['controller'] == 'car') {
         $controller = new CarController();
         $controller->deleteCar($_GET['id']);
     }
+    if ($_GET['action'] == 'edit' && isset($_GET['id']) ) {
+        $controller = new CarController();
+        $controller->editCar($_GET['id']);
+    }
+    if ($_GET['action'] == 'upload' && isset($_GET['id']) ) {
+        $controller = new CarController();
+        $controller->uploadCar($_GET['id']);
+    }
 
 }
 
