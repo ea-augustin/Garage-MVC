@@ -93,14 +93,22 @@ if ($_GET['controller'] == 'car') {
 
 if ($_GET['controller'] == 'admin') {
 
+    $user = unserialize($_SESSION['user']);
+
     if (empty($_SESSION) || !$_SESSION['user']) {
-        header("Location: index.php?controller=security&action=login");
+        header("Location: index.php?controller=car&action=list");
     }
 
-    if ($_GET['action'] == 'dashboard') {
+    if (!$user->isAdmin()){
+        header("Location: index.php?controller=car&action=list");
+    }else{
         $controller = new AdminController();
-        $controller->adminDashboard();
+        if ($_GET['action'] == 'dashboard') {
+            $controller->adminDashboard();
+        }
     }
+
+
 
     if ($_GET['action'] == 'manage' && isset($_GET['id'])) {
         $controller = new AdminController();
