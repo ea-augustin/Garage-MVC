@@ -41,6 +41,10 @@ if ($_GET['controller'] == 'security') {
         $controller = new SecurityController();
         $controller->userDelete($_GET['id']);
     }
+    if ($_GET['action'] == 'edit' && isset($_GET['id'])) {
+        $controller = new SecurityController();
+        $controller->userEdit($_GET['id']);
+    }
 
 
 }

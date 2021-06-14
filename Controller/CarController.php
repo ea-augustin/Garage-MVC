@@ -32,10 +32,49 @@ class CarController
 
     }
 
+//    error checking
+
+    private function checkForm()
+    {
+        $errors = [];
+
+        if (empty($_POST['brand'])) {
+            $errors[] = 'Please add a brand';
+        } else {
+            $lastentered['brand'] = $_POST['brand'];
+        }
+
+        if (empty($_POST['model'])) {
+            $errors[] = 'Please add the model';
+        } else {
+            $lastentered['model'] = $_POST['model'];
+        }
+
+        if (empty($_POST['fueltype'])) {
+            $errors[] = 'Please add the fuel type';
+        } else {
+            $lastentered['fueltype'] = $_POST['fueltype'];
+        }
+
+        if (empty($_POST['horsepower'])) {
+            $errors[] = 'Please add the horsepower';
+        } else {
+            $lastentered['horsepower'] = $_POST['horsepower'];
+        }
+
+        if (empty($_POST['price'])) {
+            $errors[] = 'Please add the price';
+        } else {
+            $lastentered['price'] = $_POST['price'];
+        }
+
+        return $errors;
+    }
+
     public function addSaleCars()
     {
 //       Todo: Add settings for images
-        $errors = [];
+//        $errors = [];
         $lastentered = [];
 
 //       image prerequisites
@@ -44,35 +83,36 @@ class CarController
 
 //        Make sure post is in uppercase
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($_POST['brand'])) {
-                $errors[] = 'Please add a brand';
-            } else {
-                $lastentered['brand'] = $_POST['brand'];
-            }
-
-            if (empty($_POST['model'])) {
-                $errors[] = 'Please add the model';
-            } else {
-                $lastentered['model'] = $_POST['model'];
-            }
-
-            if (empty($_POST['fueltype'])) {
-                $errors[] = 'Please add the fuel type';
-            } else {
-                $lastentered['fueltype'] = $_POST['fueltype'];
-            }
-
-            if (empty($_POST['horsepower'])) {
-                $errors[] = 'Please add the horsepower';
-            } else {
-                $lastentered['horsepower'] = $_POST['horsepower'];
-            }
-
-            if (empty($_POST['price'])) {
-                $errors[] = 'Please add the price';
-            } else {
-                $lastentered['price'] = $_POST['price'];
-            }
+            $errors = $this->checkForm();
+//            if (empty($_POST['brand'])) {
+//                $errors[] = 'Please add a brand';
+//            } else {
+//                $lastentered['brand'] = $_POST['brand'];
+//            }
+//
+//            if (empty($_POST['model'])) {
+//                $errors[] = 'Please add the model';
+//            } else {
+//                $lastentered['model'] = $_POST['model'];
+//            }
+//
+//            if (empty($_POST['fueltype'])) {
+//                $errors[] = 'Please add the fuel type';
+//            } else {
+//                $lastentered['fueltype'] = $_POST['fueltype'];
+//            }
+//
+//            if (empty($_POST['horsepower'])) {
+//                $errors[] = 'Please add the horsepower';
+//            } else {
+//                $lastentered['horsepower'] = $_POST['horsepower'];
+//            }
+//
+//            if (empty($_POST['price'])) {
+//                $errors[] = 'Please add the price';
+//            } else {
+//                $lastentered['price'] = $_POST['price'];
+//            }
 
             if (($_FILES['carImg']['size'] > 600000)) {
                 $errors[] = 'The selected image it too large , please choose a smaller image';
@@ -115,7 +155,21 @@ class CarController
 
     public function editCar($id)
     {
+        $errors = [];
+        $vehicle = $this->vehicleManager->getOneVehicle($id);
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $errors = $this->checkForm();
+            if (count($errors) == 0) {
+                $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
+                    $_POST['price'], $_POST['description'], $vehicle->getId());
+                $this->vehicleManager->updateCar($vehicle);
+                header('Location: index.php?controller=car&action=list');
+                exit();
+            }
+
+        }
+        require 'View/editCar.php';
 
     }
 

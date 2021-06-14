@@ -31,6 +31,7 @@ include 'Components/header.php';
                     <th scope="col">Description</th>
                     <th scope="col">Image</th>
                     <th scope="col">Details</th>
+                    <th scope="col">Edit</th>
                     <th scope="col">Add</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -52,6 +53,7 @@ include 'Components/header.php';
                     <td><img src="images/car/' . $vehicle->getimage() . ' " style="height:200px; width:300px;" alt=' .
                         $vehicle->getBrand() . '></td>
                     <td class=""><a href="index.php?controller=car&action=detail&id=' . $vehicle->getId() . ' "><i class="fas fa-binoculars bg-light"></i></a></td>  
+                    <td class=""><a href= "index.php?controller=car&action=edit&id=' . $vehicle->getId() . '"><i class="fas fa-edit"></i></a></td>  
                        <td class=""><a href= "index.php?controller=car&action=add"><i class="fas fa-plus bg-light"></i></a></td>  
                     <td class=""><a href="index.php?controller=car&action=delete&id=' . $vehicle->getId() . ' "><i class="fas fa-minus"></i></a></td> 
                 </tr>

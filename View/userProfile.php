@@ -49,7 +49,7 @@ include 'Components/header.php';
                         $user->getUsername() . '></td>
                     <td class=""><a href="index.php?controller=security&action=details&id=' . $user->getId() . ' "><i class="fas fa-binoculars bg-light"></i></a></td>  
                     <td class=""><a href= "index.php?controller=security&action=register"><i class="fas fa-plus bg-light"></i></a></td>  
-                       <td class=""><a href= "index.php?controller=security&action=add"><i class="fas fa-plus bg-light"></i></a></td>  
+                       <td class=""><a href= "index.php?controller=security&action=edit&id=' . $user->getId() . ' "><i class="fas fa-user-edit"></i></a></td>  
                     <td class=""><a href="index.php?controller=security&action=delete&id=' . $user->getId() . ' "><i class="fas fa-minus"></i></a></td> 
                 </tr>
                     ');
