@@ -77,56 +77,32 @@ class CarController
 //        $errors = [];
         $lastentered = [];
 
-//       image prerequisites
-        $extension_upload = $_FILES['carImg']['type'];
-        $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
 
-//        Make sure post is in uppercase
+        //  Make sure post is in uppercase
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors = $this->checkForm();
-//            if (empty($_POST['brand'])) {
-//                $errors[] = 'Please add a brand';
-//            } else {
-//                $lastentered['brand'] = $_POST['brand'];
-//            }
-//
-//            if (empty($_POST['model'])) {
-//                $errors[] = 'Please add the model';
-//            } else {
-//                $lastentered['model'] = $_POST['model'];
-//            }
-//
-//            if (empty($_POST['fueltype'])) {
-//                $errors[] = 'Please add the fuel type';
-//            } else {
-//                $lastentered['fueltype'] = $_POST['fueltype'];
-//            }
-//
-//            if (empty($_POST['horsepower'])) {
-//                $errors[] = 'Please add the horsepower';
-//            } else {
-//                $lastentered['horsepower'] = $_POST['horsepower'];
-//            }
-//
-//            if (empty($_POST['price'])) {
-//                $errors[] = 'Please add the price';
-//            } else {
-//                $lastentered['price'] = $_POST['price'];
-//            }
+//              I added if to remove an error
+            if ($_FILES['carImg']) {
+                //image prerequisites
+                $extension_upload = $_FILES['carImg']['type'];
+                $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
+                $filename= '';
 
-            if (($_FILES['carImg']['size'] > 600000)) {
-                $errors[] = 'The selected image it too large , please choose a smaller image';
-            } else {
-                if (in_array($extension_upload, $authorizedExtentions))
-                    $filename = uniqid() . '_' . basename($_FILES['carImg']['name']);
-                $imageUrl = move_uploaded_file($_FILES['carImg']['tmp_name'], 'images/car/' . $filename);
+                if (($_FILES['carImg']['size'] > 600000)) {
+                    $errors[] = 'The selected image it too large , please choose a smaller image';
+                } else {
+                    if (in_array($extension_upload, $authorizedExtentions))
+                        $filename = uniqid() . '_' . basename($_FILES['carImg']['name']);
+                    $imageUrl = move_uploaded_file($_FILES['carImg']['tmp_name'], 'images/car/' . $filename);
+                }
+
             }
-
             if (empty($_POST['description'])) {
                 $errors[] = 'Please add a description';
             } else {
                 $lastentered['description'] = $_POST['description'];
             }
+
             if (count($errors) == 0) {
                 $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
                     $_POST['price'], $_POST['description'], $filename);
@@ -139,6 +115,7 @@ class CarController
         require 'View/addCars.php';
 
     }
+
 
     public function deleteCar($id)
     {
@@ -166,8 +143,7 @@ class CarController
             if (count($errors) == 0) {
 
                 $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
-                    $_POST['price'], $_POST['description'],$_POST['image'] , $vehicle->getId());
-
+                    $_POST['price'], $_POST['description'], $_POST['image'], $vehicle->getId());
 
 
                 $this->vehicleManager->updateCar($vehicle);

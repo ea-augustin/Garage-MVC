@@ -41,6 +41,8 @@ class SecurityController
         require 'View/loginPage.php';
     }
 
+
+
     public function checkErrors(){
 
         $errors = [];
@@ -93,20 +95,20 @@ class SecurityController
 //                $errors[] = 'Please enter a valid password';
 //            }
 
-
         if (empty($_POST['confirmpassword'])) {
             $errors[] = 'Please enter the same password as before for confirmation';
         }
         if ($_POST['password'] != $_POST['confirmpassword']) {
             $errors[] = 'Passwords did not match please try again';
         }
-
-
-
-
         return $errors;
 
     }
+
+
+
+
+
 
     public function registerPage()
 
@@ -114,19 +116,24 @@ class SecurityController
         $errors = [];
         $lastentered = [];
 
-        //image prerequisites
-        $extension_upload = $_FILES['profileImg']['type'];
-        $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            $errors = $this->checkErrors();
 
-            if (($_FILES['carImg']['size'] > 600000)) {
-                $errors[] = 'The selected image it too large , please choose a smaller image';
-            } else {
-                if (in_array($extension_upload, $authorizedExtentions))
-                    $filename = uniqid() . '_' . basename($_FILES['profileImg']['name']);
-                $imageUrl = move_uploaded_file($_FILES['profileImg']['tmp_name'], 'images/profiles/' . $filename);
+
+            if ($_FILES['profileImg']) {
+                //image prerequisites
+                $extension_upload = $_FILES['profileImg']['type'];
+                $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
+
+                if (($_FILES['profileImg']['size'] > 600000)) {
+                    $errors[] = 'The selected image it too large , please choose a smaller image';
+                } else {
+                    if (in_array($extension_upload, $authorizedExtentions))
+                        $filename = uniqid() . '_' . basename($_FILES['profileImg']['name']);
+                    $imageUrl = move_uploaded_file($_FILES['profileImg']['tmp_name'], 'images/profiles/' . $filename);
+                }
             }
 
             if (count($errors) == 0) {
