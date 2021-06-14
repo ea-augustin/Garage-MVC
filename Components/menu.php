@@ -33,13 +33,36 @@
 
                     <a href="index.php?controller=car&action=list" class="nav-link"><i class="fas fa-car-side"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?controller=admin&action=home" class="nav-link"><i class="fas fa-tools"></i></a>
-                </li>
-                <li class="nav-item">
+
+                <?php
+                if (!empty($_SESSION)) {
+                    if ($_SESSION['user']) {
+
+                        $user = unserialize($_SESSION['user']);
+
+                        if ($user->isAdmin()) {
+
+                            echo('
+                    
+                       <li class="nav-item">
+                    <a href="index.php?controller=admin&action=dashboard" class="nav-link"><i class="fas
+                    fa-tools"></i></a>
+                      </li>
+                      <li class="nav-item">
                     <a href="index.php?controller=security&action=profiles" class="nav-link"><i class="fas
                     fa-users"></i></a>
-                </li>
+                      </li>
+                    
+                    ');
+                        }
+                        echo('Welcome: ' . unserialize($_SESSION['user'])->getUsername());
+
+                    }
+                }
+
+                ?>
+
+
             </ul>
         </div>
     </div>

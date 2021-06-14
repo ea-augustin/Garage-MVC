@@ -19,7 +19,7 @@ include 'components/header.php';
                         <div class="mb-3">
                             <input type="text" class="form-control" id="username" name="username"
                                    aria-describedby="usernameHelp"
-                                   placeholder="Username" value="<?php echo ((isset($lastentered['username'])) ?
+                                   placeholder="Username" value="<?php echo((isset($lastentered['username'])) ?
                                 $lastentered['username'] : '')
                             ?>">
                             <div id="login" class="form-text">We'll never share your details with anyone else.</div>
@@ -27,14 +27,14 @@ include 'components/header.php';
                         <div class="mb-3">
                             <input type="text" class="form-control" id="firstname" name="firstname"
                                    aria-describedby="firstnameHelp"
-                                   placeholder="Firstname" value="<?php echo ((isset($lastentered['firstname'])) ?
+                                   placeholder="Firstname" value="<?php echo((isset($lastentered['firstname'])) ?
                                 $lastentered['firstname'] : '')
                             ?>">
                         </div>
                         <div class="mb-3">
                             <input type="text" class="form-control" id="lastname" name="lastname"
                                    aria-describedby="lastnameHelp"
-                                   placeholder="Lastname" value="<?php echo ((isset($lastentered['lastname'])) ?
+                                   placeholder="Lastname" value="<?php echo((isset($lastentered['lastname'])) ?
                                 $lastentered['lastname'] : '')
                             ?>">
                         </div>
@@ -46,7 +46,7 @@ include 'components/header.php';
                         <div class="mb-3">
                             <input type="text" class="form-control" id="address" name="address"
                                    aria-describedby="addressHelp"
-                                   placeholder="Address" value="<?php echo ((isset($lastentered['address'])) ?
+                                   placeholder="Address" value="<?php echo((isset($lastentered['address'])) ?
                                 $lastentered['address'] : '')
                             ?>">
                         </div>
@@ -64,10 +64,18 @@ include 'components/header.php';
                             <span>jpg,jpeg,gif and png files only</span>
                         </div>
 
+                        <div class="form-check my-5">
+                            <input class="form-check-input" type="checkbox"  name="isAdmin"
+                                   id="isAdmin">
+                            <label class="form-check-label" for="isAdmin">
+                                Admin User
+                            </label>
+                        </div>
+
                         <button type="submit" class="btn btn-dark">Submit</button>
                     </form>
                     <?php
-                      require 'Components/error.php';
+                    require 'Components/error.php';
                     ?>
 
                 </div>

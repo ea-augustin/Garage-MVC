@@ -97,14 +97,16 @@ if ($_GET['controller'] == 'admin') {
         header("Location: index.php?controller=security&action=login");
     }
 
-    if ($_GET['action'] == 'manage') {
-        $controller = new AdminController();
-        $controller->adminManage();
-    }
-    if ($_GET['action'] == 'home') {
+    if ($_GET['action'] == 'dashboard') {
         $controller = new AdminController();
         $controller->adminDashboard();
     }
+
+    if ($_GET['action'] == 'manage' && isset($_GET['id'])) {
+        $controller = new AdminController();
+        $controller->adminManage();
+    }
+
 }
 
 

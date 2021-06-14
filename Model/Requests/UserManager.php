@@ -23,7 +23,7 @@ class UserManager extends DatabaseConnection
         if ($result) {
             $user = new User($result['username'], $result['firstname'],
                 $result['lastname'], $result['email'],
-                $result['address'], $result['password'], $result['image']);
+                $result['address'], $result['password'], $result['image'],$result['role']);
         }
 
         return $user;
@@ -32,8 +32,8 @@ class UserManager extends DatabaseConnection
 
     public function registerUser(User $user)
     {
-        $query = $this->database->prepare('INSERT INTO users (image,username,firstname,lastname,email,address,password) 
-                                       VALUES (:image,:username,:firstname,:lastname,:email,:address,:password)');
+        $query = $this->database->prepare('INSERT INTO users (image,username,firstname,lastname,email,address,password,role) 
+                                       VALUES (:image,:username,:firstname,:lastname,:email,:address,:password,:role)');
 
         $query->execute([
             'image' => $user->getImage(),
@@ -43,6 +43,7 @@ class UserManager extends DatabaseConnection
             'email' => $user->getEmail(),
             'address' => $user->getAddress(),
             'password' => $user->getPassword(),
+            'role'=>$user->getRole()
 
         ]);
     }
@@ -58,7 +59,7 @@ class UserManager extends DatabaseConnection
 
         foreach ($results as $result) {
             $userTable[] = new User($result['username'], $result['firstname'], $result['lastname'], $result['email'],
-                $result['address'], $result['password'], $result['image'], $result['id']);
+                $result['address'], $result['password'], $result['image'], $result['id'],$result['role']);
         }
 
         return $userTable;
@@ -74,7 +75,7 @@ class UserManager extends DatabaseConnection
 
         if ($results) {
             $user = new User($results['username'], $results['firstname'], $results['lastname'], $results['email'],
-                $results['address'], $results['password'], $results['image'], $results['id']);
+                $results['address'], $results['password'], $results['image'], $results['id'],$results['role']);
         }
         return $user;
     }

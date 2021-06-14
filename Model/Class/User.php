@@ -11,6 +11,7 @@ class User
     private $address;
     private $password;
     private $image;
+    private $role;
 
     /**
      * User constructor.
@@ -21,8 +22,9 @@ class User
      * @param $address
      * @param $password
      */
-
-    public function __construct($username, $firstname, $lastname, $email, $address, $password,$image,$id = null)
+    //added role with  default value
+    public function __construct($username, $firstname, $lastname, $email, $address, $password, $image, $role = 'client',
+                                $id = null)
     {
         $this->id = $id;
         $this->username = $username;
@@ -32,6 +34,16 @@ class User
         $this->address = $address;
         $this->password = $password;
         $this->image = $image;
+        $this->role = $role;
+    }
+
+    public function isAdmin()
+    {
+        if ($this->role == "administrator") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -162,7 +174,21 @@ class User
         $this->image = $image;
     }
 
+    /**
+     * @return mixed|string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 
+    /**
+     * @param mixed|string $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
 
 
 }

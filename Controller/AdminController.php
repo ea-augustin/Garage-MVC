@@ -12,4 +12,6 @@ class AdminController
 
         require 'View/adminManager.php';
     }
+
+
 }
