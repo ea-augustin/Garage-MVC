@@ -26,6 +26,7 @@ include 'Components/header.php';
                     <th scope="col">Lastname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Image</th>
                     <th scope="col">Details</th>
                     <th scope="col">Add</th>
@@ -45,6 +46,7 @@ include 'Components/header.php';
                     <td>' . $user->getLastname() . '</td>
                      <td>' . $user->getEmail() . '</td>
                     <td>' . $user->getAddress() . '</td>
+                    <td>' . $user->getRole() . '</td>
                     <td><img src="images/profiles/' . $user->getimage() . ' " style="height:200px; width:300px;" alt=' .
                         $user->getUsername() . '></td>
                     <td class=""><a href="index.php?controller=security&action=details&id=' . $user->getId() . ' "><i class="fas fa-binoculars bg-light"></i></a></td>  

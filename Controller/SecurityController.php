@@ -203,7 +203,8 @@ class SecurityController
 
             if (count($errors)==0){
                  $user = new User($_POST['username'],$_POST['firstname'],$_POST['lastname']
-                     ,$_POST['email'],$_POST['address'],$_POST['password'],$_POST['image'],$user->getId());
+                     ,$_POST['email'],$_POST['address'],$_POST['password'],$_POST['image'],$_POST['role'],$user->getId
+                     ());
                  $this->userManager->updateUser($user);
                 header('Location: index.php?controller=security&action=profiles');
                 exit();

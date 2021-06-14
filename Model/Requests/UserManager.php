@@ -59,7 +59,7 @@ class UserManager extends DatabaseConnection
 
         foreach ($results as $result) {
             $userTable[] = new User($result['username'], $result['firstname'], $result['lastname'], $result['email'],
-                $result['address'], $result['password'], $result['image'], $result['id'],$result['role']);
+                $result['address'], $result['password'], $result['image'],$result['role'], $result['id']);
         }
 
         return $userTable;
@@ -75,7 +75,7 @@ class UserManager extends DatabaseConnection
 
         if ($results) {
             $user = new User($results['username'], $results['firstname'], $results['lastname'], $results['email'],
-                $results['address'], $results['password'], $results['image'], $results['id'],$results['role']);
+                $results['address'], $results['password'], $results['image'],$results['role'], $results['id']);
         }
         return $user;
     }

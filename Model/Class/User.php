@@ -9,9 +9,10 @@ class User
     private $lastname;
     private $email;
     private $address;
+    private $role;
     private $password;
     private $image;
-    private $role;
+
 
     /**
      * User constructor.
@@ -32,9 +33,10 @@ class User
         $this->lastname = $lastname;
         $this->email = $email;
         $this->address = $address;
+        $this->role = $role;
         $this->password = $password;
         $this->image = $image;
-        $this->role = $role;
+
     }
 
     public function isAdmin()
