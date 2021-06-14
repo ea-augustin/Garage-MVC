@@ -158,12 +158,20 @@ class CarController
         $errors = [];
         $vehicle = $this->vehicleManager->getOneVehicle($id);
 
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors = $this->checkForm();
+
+
             if (count($errors) == 0) {
+
                 $vehicle = new Vehicle($_POST['brand'], $_POST['model'], $_POST['fueltype'], $_POST['horsepower'],
-                    $_POST['price'], $_POST['description'], $vehicle->getId());
+                    $_POST['price'], $_POST['description'],$_POST['image'] , $vehicle->getId());
+
+
+
                 $this->vehicleManager->updateCar($vehicle);
+
                 header('Location: index.php?controller=car&action=list');
                 exit();
             }

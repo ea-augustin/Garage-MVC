@@ -17,8 +17,6 @@ include 'Components/header.php';
             <h1> Car View</h1>
             <span class="btn btn-info btn-sm my-3"><a href="index.php?controller=garage&action=list"
                                                       class="nav-link text-white">Garages</a> </span>
-            <span class="btn btn-info btn-sm"><a href="index.php?controller=car&action=add"
-                                                 class="nav-link text-white">Add</a> </span>
             <table class="table text-center">
                 <thead>
                 <tr>

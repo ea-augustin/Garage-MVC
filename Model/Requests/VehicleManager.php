@@ -36,6 +36,7 @@ class VehicleManager extends DatabaseConnection
             $vehicle = new Vehicle($results['brand'], $results['model'], $results['fueltype'], $results['horsepower']
                 , $results['price'], $results['description'], $results['image'], $results['id']);
         }
+
         return $vehicle;
 
     }
@@ -71,6 +72,7 @@ class VehicleManager extends DatabaseConnection
 
     public function updateCar(Vehicle $vehicle)
     {
+
         $query = $this->database->prepare("UPDATE vehicle SET brand = :brand,model = :model,fueltype = :fueltype,horsepower = :horsepower
                  ,price = :price,description = :description,image = :image WHERE id = :id");
 
