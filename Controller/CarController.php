@@ -74,7 +74,7 @@ class CarController
     public function addSaleCars()
     {
 //       Todo: Add settings for images
-//        $errors = [];
+       $errors = [];
         $lastentered = [];
 
 
