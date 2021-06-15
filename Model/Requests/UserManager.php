@@ -23,7 +23,7 @@ class UserManager extends DatabaseConnection
         if ($result) {
             $user = new User($result['username'], $result['firstname'],
                 $result['lastname'], $result['email'],
-                $result['address'], $result['password'], $result['image'],$result['role']);
+                $result['address'], $result['password'], $result['image'], $result['role']);
         }
 
         return $user;
@@ -43,7 +43,7 @@ class UserManager extends DatabaseConnection
             'email' => $user->getEmail(),
             'address' => $user->getAddress(),
             'password' => $user->getPassword(),
-            'role'=>$user->getRole()
+            'role' => $user->getRole()
 
         ]);
     }
@@ -59,7 +59,7 @@ class UserManager extends DatabaseConnection
 
         foreach ($results as $result) {
             $userTable[] = new User($result['username'], $result['firstname'], $result['lastname'], $result['email'],
-                $result['address'], $result['password'], $result['image'],$result['role'], $result['id']);
+                $result['address'], $result['password'], $result['image'], $result['role'], $result['id']);
         }
 
         return $userTable;
@@ -75,7 +75,7 @@ class UserManager extends DatabaseConnection
 
         if ($results) {
             $user = new User($results['username'], $results['firstname'], $results['lastname'], $results['email'],
-                $results['address'], $results['password'], $results['image'],$results['role'], $results['id']);
+                $results['address'], $results['password'], $results['image'], $results['role'], $results['id']);
         }
         return $user;
     }
@@ -95,17 +95,72 @@ class UserManager extends DatabaseConnection
                  lastname= :lastname, email = :email,address = :address, password = :password, image = :image WHERE id = :id");
 
         $query->execute([
-            'username'=>$user->getUsername(),
-            'firstname'=>$user->getFirstname(),
-            'lastname' =>$user->getLastname(),
-            'email'=> $user->getEmail(),
-            'address'=>$user->getAddress(),
-            'password'=>$user->getPassword(),
-            'image'=>$user->getImage(),
-            'id'=>$user->getId()
+            'username' => $user->getUsername(),
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+            'address' => $user->getAddress(),
+            'password' => $user->getPassword(),
+            'image' => $user->getImage(),
+            'id' => $user->getId()
 
 
         ]);
+    }
+
+    public function findByUsername($username)
+    {
+        $user = null;
+        $query = $this->database->prepare("SELECT * FROM users WHERE username = :username");
+        $query->execute([
+            'username' => $username
+        ]);
+        $userFromDatabase = $query->fetch();
+        if ($userFromDatabase) {
+            $user = new User($userFromDatabase['username'], $userFromDatabase['firstname'], $userFromDatabase['lastname'],
+                $userFromDatabase['email'], $userFromDatabase['address'], $userFromDatabase['password'], $userFromDatabase['image'], $userFromDatabase['role'], $userFromDatabase['id']);
+        }
+
+        return $user;
+
+    }
+
+    public function testExist($username)
+    {
+        $user = $this->findByUsername($username);
+        if ($user) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function findUserByEmail($email)
+    {
+        $user = null;
+        $query = $this->database->prepare("SELECT * FROM users WHERE email = :email");
+        $query->execute([
+            'email' => $email
+        ]);
+        $userFromDatabase = $query->fetch();
+        if ($userFromDatabase) {
+            $user = new User($userFromDatabase['username'], $userFromDatabase['firstname'], $userFromDatabase['lastname'],
+                $userFromDatabase['email'], $userFromDatabase['address'], $userFromDatabase['password'], $userFromDatabase['image'], $userFromDatabase['role'], $userFromDatabase['id']);
+        }
+
+        return $user;
+
+    }
+
+    public function emailExist($email)
+    {
+        $user = $this->findUserByEmail($email);
+        if ($user) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -42,8 +42,8 @@ class SecurityController
     }
 
 
-
-    public function checkErrors(){
+    public function checkErrors()
+    {
 
         $errors = [];
         $lastentered = [];
@@ -106,10 +106,6 @@ class SecurityController
     }
 
 
-
-
-
-
     public function registerPage()
 
     {
@@ -117,15 +113,15 @@ class SecurityController
         $lastentered = [];
 
 
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-           $errors = $this->checkErrors();
+            $errors = $this->checkErrors();
 
 
             if ($_FILES['profileImg']) {
                 //image prerequisites
                 $extension_upload = $_FILES['profileImg']['type'];
                 $authorizedExtentions = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
+                $filename = "";
 
                 if (($_FILES['profileImg']['size'] > 600000)) {
                     $errors[] = 'The selected image it too large , please choose a smaller image';
@@ -137,16 +133,31 @@ class SecurityController
             }
 
             if (count($errors) == 0) {
-                $role ='client';
 
-                if($_POST['isAdmin']== 'on'){
-                    $role= "administrator";
+                $testUsername = $this->userManager->testExist($_POST['username']);
+                $testEmail = $this->userManager->emailExist($_POST['email']);
+
+                if ($testUsername) {
+                    $errors[] = 'Sorry user already exists';
+                    unset($lastentered['username']);
                 }
-                $register = new User($_POST['username'], $_POST['firstname'], $_POST['lastname'], $_POST['email']
-                    , $_POST['address'], $_POST['password'],$filename,$role);
-                $this->userManager->registerUser($register);
-                header('Location: index.php?controller=security&action=login');
-                exit();
+                if ($testEmail) {
+                    $errors[] = 'Sorry email already exists';
+                    unset($lastentered['email']);
+                }
+                if (count($errors) == 0) {
+                    $role = 'client';
+
+                    if ($_POST['isAdmin'] == 'on') {
+                        $role = "administrator";
+                    }
+                    $register = new User($_POST['username'], $_POST['firstname'], $_POST['lastname'], $_POST['email']
+                        , $_POST['address'], $_POST['password'], $filename, $role);
+                    $this->userManager->registerUser($register);
+                    header('Location: index.php?controller=security&action=login');
+                    exit();
+                }
+
             }
 
 
@@ -203,21 +214,21 @@ class SecurityController
     public function userEdit($id)
     {
         $errors = [];
-        $user= $this->userManager->getOneUser($id);
+        $user = $this->userManager->getOneUser($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-             $errors= $this->checkErrors();
+            $errors = $this->checkErrors();
 
-            if (count($errors)==0){
-                 $user = new User($_POST['username'],$_POST['firstname'],$_POST['lastname']
-                     ,$_POST['email'],$_POST['address'],$_POST['password'],$_POST['image'],$_POST['role'],$user->getId
-                     ());
-                 $this->userManager->updateUser($user);
+            if (count($errors) == 0) {
+                $user = new User($_POST['username'], $_POST['firstname'], $_POST['lastname']
+                    , $_POST['email'], $_POST['address'], $_POST['password'], $_POST['image'], $_POST['role'], $user->getId
+                    ());
+                $this->userManager->updateUser($user);
                 header('Location: index.php?controller=security&action=profiles');
                 exit();
             }
         }
-       require 'View/editProfile.php';
+        require 'View/editProfile.php';
 
     }
 

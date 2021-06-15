@@ -71,15 +71,15 @@ if ($_GET['controller'] == 'car') {
         $controller->carDetail($_GET['id']);
     }
 
-    if ($_GET['action'] == 'delete' && isset($_GET['id']) ) {
+    if ($_GET['action'] == 'delete' && isset($_GET['id'])) {
         $controller = new CarController();
         $controller->deleteCar($_GET['id']);
     }
-    if ($_GET['action'] == 'edit' && isset($_GET['id']) ) {
+    if ($_GET['action'] == 'edit' && isset($_GET['id'])) {
         $controller = new CarController();
         $controller->editCar($_GET['id']);
     }
-    if ($_GET['action'] == 'upload' && isset($_GET['id']) ) {
+    if ($_GET['action'] == 'upload' && isset($_GET['id'])) {
         $controller = new CarController();
         $controller->uploadCar($_GET['id']);
     }
@@ -99,16 +99,14 @@ if ($_GET['controller'] == 'admin') {
         header("Location: index.php?controller=car&action=list");
     }
 
-    if (!$user->isAdmin()){
+    if (!$user->isAdmin()) {
         header("Location: index.php?controller=car&action=list");
-    }else{
+    } else {
         $controller = new AdminController();
         if ($_GET['action'] == 'dashboard') {
             $controller->adminDashboard();
         }
     }
-
-
 
     if ($_GET['action'] == 'manage' && isset($_GET['id'])) {
         $controller = new AdminController();
@@ -138,11 +136,10 @@ if ($_GET['controller'] == 'garage') {
         $controller = new GarageController();
         $controller->viewGarages();
     }
-    if ($_GET['action'] == 'detail' ) {
+    if ($_GET['action'] == 'detail') {
         $controller = new GarageController();
         $controller->garageDetail();
     }
-
 
 
 }
@@ -163,7 +160,7 @@ if ($_GET['controller'] == 'ad') {
 
 }
 
-if ($_GET['controller']=='error' && $_GET['action']=='not-found'){
+if ($_GET['controller'] == 'error' && $_GET['action'] == 'not-found') {
     $controller = new ExceptionController();
     $controller->pageNotFound();
 }

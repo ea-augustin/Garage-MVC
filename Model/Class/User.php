@@ -22,6 +22,8 @@ class User
      * @param $email
      * @param $address
      * @param $password
+     * @param $image
+     * @param $role
      */
     //added role with  default value
     public function __construct($username, $firstname, $lastname, $email, $address, $password, $image, $role = 'client',
