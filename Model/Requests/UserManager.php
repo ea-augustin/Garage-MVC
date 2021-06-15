@@ -8,30 +8,26 @@ class UserManager extends DatabaseConnection
         parent::__construct();
     }
 
-    public function login($username, $password)
+    public function login($username,$password)
     {
-        $query = $this->database->prepare('SELECT * FROM users 
-                                       WHERE password = :password 
-                                       AND username = :username');
-        $query->execute([
-            'username' => $username,
-            'password' => $password
-        ]);
 
-        $result = $query->fetch();
+        $userClient= null;
 
-        if ($result) {
-            $user = new User($result['username'], $result['firstname'],
-                $result['lastname'], $result['email'],
-                $result['address'], $result['password'], $result['image'], $result['role']);
+        $user= $this->findByUsername($username);
+
+        if ($user) {
+            if(password_verify($password,$user->getPassword())){
+                $userClient = $user;
+            }
         }
 
-        return $user;
+        return $userClient;
     }
 
 
     public function registerUser(User $user)
     {
+        $user->setPassword(password_hash($user->getPassword(),PASSWORD_DEFAULT));
         $query = $this->database->prepare('INSERT INTO users (image,username,firstname,lastname,email,address,password,role) 
                                        VALUES (:image,:username,:firstname,:lastname,:email,:address,:password,:role)');
 

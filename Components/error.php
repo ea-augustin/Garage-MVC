@@ -1,5 +1,4 @@
 <?php
-
 echo('<div class="text-danger">');
 if (count($errors) > 0) {
     echo('<ul>');
@@ -9,3 +8,5 @@ if (count($errors) > 0) {
     echo('</ul>');
 }
 echo('</div>');
+
+

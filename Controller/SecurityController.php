@@ -28,7 +28,7 @@ class SecurityController
             }
 
             if (count($errors) == 0) {
-                $loggedUser = $this->userManager->login($_POST['username'], $_POST['password']);
+                $loggedUser = $this->userManager->login($_POST['username'],$_POST['password']);
                 if ($loggedUser) {
                     $_SESSION['user'] = serialize($loggedUser);
                     header('Location: index.php?controller=car&action=list');
